@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(/usr/bin/git init:*)",
+      "Bash(/usr/bin/git add:*)",
+      "Bash(/usr/bin/git commit:*)",
+      "Bash(git --version)",
+      "Read(//usr/local/bin/**)",
+      "Bash(/opt/homebrew/bin/git init:*)",
+      "Bash(/opt/homebrew/bin/git add:*)",
+      "Bash(/opt/homebrew/bin/git commit:*)"
+    ]
+  }
+}

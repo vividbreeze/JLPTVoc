@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jlptvoc:latest
+    container_name: jlptvoc
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - jlptvoc-data:/app/data
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DB_PATH: /app/data
+      CORS_ORIGIN: "*"
+
+volumes:
+  jlptvoc-data:
+    driver: local
