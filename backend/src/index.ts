@@ -7,7 +7,7 @@ import statsRoutes from './routes/stats';
 import './database/seed'; // auto-seed on first run
 
 const app = express();
-const PORT = parseInt(process.env.PORT || '3001', 10);
+const PORT = parseInt(process.env.PORT || '3020', 10);
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173',

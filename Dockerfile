@@ -32,9 +32,9 @@ COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 VOLUME ["/app/data"]
 ENV DB_PATH=/app/data
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3020
 ENV CORS_ORIGIN=*
 
-EXPOSE 3001
+EXPOSE 3020
 
 CMD ["node", "backend/dist/index.js"]

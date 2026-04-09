@@ -9,7 +9,12 @@
       "Read(//usr/local/bin/**)",
       "Bash(/opt/homebrew/bin/git init:*)",
       "Bash(/opt/homebrew/bin/git add:*)",
-      "Bash(/opt/homebrew/bin/git commit:*)"
+      "Bash(/opt/homebrew/bin/git commit:*)",
+      "Bash(/opt/homebrew/bin/git branch:*)",
+      "Bash(gh repo:*)",
+      "Bash(/opt/homebrew/bin/git remote:*)",
+      "Bash(/opt/homebrew/bin/git log:*)",
+      "Bash(/opt/homebrew/bin/git push:*)"
     ]
   }
 }
