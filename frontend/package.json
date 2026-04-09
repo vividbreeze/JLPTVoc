@@ -1,6 +1,7 @@
 {
   "name": "jlptvoc-frontend",
   "version": "1.0.0",
+  "type": "module",
   "description": "JLPT N5 Vocabulary Trainer - Frontend",
   "scripts": {
     "dev": "vite",
