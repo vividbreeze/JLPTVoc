@@ -1,10 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import { initDb } from './database/db';
+import { seed } from './database/seed';
 import vocabularyRoutes from './routes/vocabulary';
 import progressRoutes from './routes/progress';
 import statsRoutes from './routes/stats';
-import './database/seed'; // auto-seed on first run
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3020', 10);
@@ -15,15 +16,11 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// API routes
 app.use('/api/vocabulary', vocabularyRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/stats', statsRoutes);
-
-// Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 
-// Serve static frontend in production
 if (process.env.NODE_ENV === 'production') {
   const staticPath = path.join(__dirname, '../../frontend/dist');
   app.use(express.static(staticPath));
@@ -32,6 +29,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🌸 JLPT Voc Server running on port ${PORT}`);
-});
+async function start() {
+  await initDb();
+  await seed();
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🌸 JLPT Voc Server running on port ${PORT}`);
+  });
+}
+
+start().catch(console.error);

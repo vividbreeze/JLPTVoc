@@ -1,4 +1,4 @@
-import db from './db';
+import db, { initDb } from './db';
 
 interface VocabEntry {
   japanese: string;
@@ -6,8 +6,6 @@ interface VocabEntry {
   romaji: string;
   german: string;
   category: string;
-  example_jp?: string;
-  example_de?: string;
 }
 
 const vocabulary: VocabEntry[] = [
@@ -157,7 +155,6 @@ const vocabulary: VocabEntry[] = [
   { japanese: '犬', hiragana: 'いぬ', romaji: 'Inu', german: 'Hund', category: '動物' },
   { japanese: '猫', hiragana: 'ねこ', romaji: 'Neko', german: 'Katze', category: '動物' },
   { japanese: '鳥', hiragana: 'とり', romaji: 'Tori', german: 'Vogel', category: '動物' },
-  { japanese: '魚', hiragana: 'さかな', romaji: 'Sakana', german: 'Fisch', category: '動物' },
   { japanese: '馬', hiragana: 'うま', romaji: 'Uma', german: 'Pferd', category: '動物' },
   { japanese: '牛', hiragana: 'うし', romaji: 'Ushi', german: 'Kuh / Rind', category: '動物' },
   { japanese: '豚', hiragana: 'ぶた', romaji: 'Buta', german: 'Schwein', category: '動物' },
@@ -218,7 +215,7 @@ const vocabulary: VocabEntry[] = [
   { japanese: 'あける', hiragana: 'あける', romaji: 'Akeru', german: 'öffnen', category: '動詞' },
   { japanese: 'しめる', hiragana: 'しめる', romaji: 'Shimeru', german: 'schließen', category: '動詞' },
 
-  // ========== 代名詞・基本語 (Grundwörter) ==========
+  // ========== 基本語 (Grundwörter) ==========
   { japanese: '私', hiragana: 'わたし', romaji: 'Watashi', german: 'ich / mein', category: '基本語' },
   { japanese: 'あなた', hiragana: 'あなた', romaji: 'Anata', german: 'du / Sie', category: '基本語' },
   { japanese: '彼', hiragana: 'かれ', romaji: 'Kare', german: 'er / sein', category: '基本語' },
@@ -265,39 +262,29 @@ const vocabulary: VocabEntry[] = [
   { japanese: '眼鏡', hiragana: 'めがね', romaji: 'Megane', german: 'Brille', category: '服' },
 ];
 
-function seed() {
-  const existing = db.prepare('SELECT COUNT(*) as count FROM vocabulary').get() as { count: number };
+export async function seed(): Promise<void> {
+  await initDb();
 
-  if (existing.count > 0) {
-    console.log(`Database already has ${existing.count} vocabulary entries. Skipping seed.`);
+  const existing = await db.execute('SELECT COUNT(*) as count FROM vocabulary');
+  const count = existing.rows[0]?.count as number ?? 0;
+
+  if (count > 0) {
+    console.log(`Database already has ${count} vocabulary entries. Skipping seed.`);
     return;
   }
 
-  const insert = db.prepare(`
-    INSERT INTO vocabulary (japanese, hiragana, romaji, german, category, example_jp, example_de)
-    VALUES (@japanese, @hiragana, @romaji, @german, @category, @example_jp, @example_de)
-  `);
+  for (const entry of vocabulary) {
+    const result = await db.execute({
+      sql: `INSERT INTO vocabulary (japanese, hiragana, romaji, german, category)
+            VALUES (?, ?, ?, ?, ?)`,
+      args: [entry.japanese, entry.hiragana, entry.romaji, entry.german, entry.category],
+    });
+    await db.execute({
+      sql: `INSERT OR IGNORE INTO progress (vocabulary_id, score, review_count, next_review)
+            VALUES (?, 0, 0, datetime('now'))`,
+      args: [result.lastInsertRowid],
+    });
+  }
 
-  const insertProgress = db.prepare(`
-    INSERT OR IGNORE INTO progress (vocabulary_id, score, review_count, next_review)
-    VALUES (?, 0, 0, CURRENT_TIMESTAMP)
-  `);
-
-  const insertMany = db.transaction((entries: VocabEntry[]) => {
-    for (const entry of entries) {
-      const result = insert.run({
-        ...entry,
-        example_jp: entry.example_jp ?? null,
-        example_de: entry.example_de ?? null,
-      });
-      insertProgress.run(result.lastInsertRowid);
-    }
-  });
-
-  insertMany(vocabulary);
-  console.log(`Seeded ${vocabulary.length} vocabulary entries.`);
+  console.log(`🌸 Seeded ${vocabulary.length} vocabulary entries.`);
 }
-
-seed();
-
-export { vocabulary };

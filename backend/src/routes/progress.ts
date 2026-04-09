@@ -3,25 +3,21 @@ import db from '../database/db';
 
 const router = Router();
 
-// Spaced repetition: minutes until next review based on score
 function getNextReviewMinutes(score: number, reviewCount: number): number {
   const intervals: Record<number, number> = {
-    1: 1,          // 1 minute  - überhaupt nicht
-    2: 10,         // 10 minutes - kaum
-    3: 60 * 24,    // 1 day    - fast
-    4: 60 * 24 * 3, // 3 days  - gut
-    5: 60 * 24 * 7, // 7 days  - perfekt (first time)
+    1: 1,
+    2: 10,
+    3: 60 * 24,
+    4: 60 * 24 * 3,
+    5: 60 * 24 * 7,
   };
   const base = intervals[score] ?? 60 * 24;
-  // Grow interval for repeatedly mastered words
-  if (score === 5 && reviewCount > 1) {
-    return base * Math.min(reviewCount, 4);
-  }
+  if (score === 5 && reviewCount > 1) return base * Math.min(reviewCount, 4);
   return base;
 }
 
-// POST /api/progress/:vocabId - update progress for a word
-router.post('/:vocabId', (req: Request, res: Response) => {
+// POST /api/progress/:vocabId
+router.post('/:vocabId', async (req: Request, res: Response) => {
   const { vocabId } = req.params;
   const { score } = req.body as { score: number };
 
@@ -29,44 +25,52 @@ router.post('/:vocabId', (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Score must be between 1 and 5' });
   }
 
-  const existing = db.prepare('SELECT * FROM progress WHERE vocabulary_id = ?').get(vocabId) as
-    { id: number; score: number; review_count: number } | undefined;
-
-  const reviewCount = (existing?.review_count ?? 0) + 1;
+  const existing = await db.execute({
+    sql: 'SELECT * FROM progress WHERE vocabulary_id = ?',
+    args: [vocabId],
+  });
+  const row = existing.rows[0];
+  const reviewCount = ((row?.review_count as number) ?? 0) + 1;
   const minutes = getNextReviewMinutes(score, reviewCount);
 
-  if (existing) {
-    db.prepare(`
-      UPDATE progress
-      SET score = ?, review_count = ?, last_reviewed = CURRENT_TIMESTAMP,
-          next_review = datetime('now', '+' || ? || ' minutes')
-      WHERE vocabulary_id = ?
-    `).run(score, reviewCount, minutes, vocabId);
+  if (row) {
+    await db.execute({
+      sql: `UPDATE progress
+            SET score = ?, review_count = ?, last_reviewed = datetime('now'),
+                next_review = datetime('now', '+' || ? || ' minutes')
+            WHERE vocabulary_id = ?`,
+      args: [score, reviewCount, minutes, vocabId],
+    });
   } else {
-    db.prepare(`
-      INSERT INTO progress (vocabulary_id, score, review_count, last_reviewed, next_review)
-      VALUES (?, ?, ?, CURRENT_TIMESTAMP, datetime('now', '+' || ? || ' minutes'))
-    `).run(vocabId, score, reviewCount, minutes);
+    await db.execute({
+      sql: `INSERT INTO progress (vocabulary_id, score, review_count, last_reviewed, next_review)
+            VALUES (?, ?, ?, datetime('now'), datetime('now', '+' || ? || ' minutes'))`,
+      args: [vocabId, score, reviewCount, minutes],
+    });
   }
 
-  const updated = db.prepare('SELECT * FROM progress WHERE vocabulary_id = ?').get(vocabId);
-  res.json(updated);
+  const updated = await db.execute({
+    sql: 'SELECT * FROM progress WHERE vocabulary_id = ?',
+    args: [vocabId],
+  });
+  res.json(updated.rows[0]);
 });
 
-// DELETE /api/progress/:vocabId - reset progress for a word
-router.delete('/:vocabId', (req: Request, res: Response) => {
-  db.prepare(`
-    UPDATE progress SET score = 0, review_count = 0, last_reviewed = NULL, next_review = CURRENT_TIMESTAMP
-    WHERE vocabulary_id = ?
-  `).run(req.params.vocabId);
+// POST /api/progress/reset/all
+router.post('/reset/all', async (_req: Request, res: Response) => {
+  await db.execute(
+    `UPDATE progress SET score = 0, review_count = 0, last_reviewed = NULL, next_review = datetime('now')`
+  );
   res.json({ success: true });
 });
 
-// POST /api/progress/reset-all - reset all progress
-router.post('/reset/all', (_req: Request, res: Response) => {
-  db.prepare(`
-    UPDATE progress SET score = 0, review_count = 0, last_reviewed = NULL, next_review = CURRENT_TIMESTAMP
-  `).run();
+// DELETE /api/progress/:vocabId
+router.delete('/:vocabId', async (req: Request, res: Response) => {
+  await db.execute({
+    sql: `UPDATE progress SET score = 0, review_count = 0, last_reviewed = NULL, next_review = datetime('now')
+          WHERE vocabulary_id = ?`,
+    args: [req.params.vocabId],
+  });
   res.json({ success: true });
 });
 

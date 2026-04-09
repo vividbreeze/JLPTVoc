@@ -14,7 +14,10 @@
       "Bash(gh repo:*)",
       "Bash(/opt/homebrew/bin/git remote:*)",
       "Bash(/opt/homebrew/bin/git log:*)",
-      "Bash(/opt/homebrew/bin/git push:*)"
+      "Bash(/opt/homebrew/bin/git push:*)",
+      "Bash(npm install:*)",
+      "Bash(/opt/homebrew/bin/npm install:*)",
+      "Bash(PATH=\"/usr/local/bin:$PATH\" npm install)"
     ]
   }
 }
