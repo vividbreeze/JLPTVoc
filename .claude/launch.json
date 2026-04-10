@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Backend (Express/ts-node-dev)",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH && cd /Users/christoph/Projects/JLPTVoc && npm run dev --prefix backend"],
+      "port": 3020
+    },
+    {
+      "name": "Frontend (Vite/React)",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH && cd /Users/christoph/Projects/JLPTVoc && npm run dev --prefix frontend"],
+      "port": 5173
+    },
+    {
+      "name": "Alle Server (concurrently)",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["/Users/christoph/Projects/JLPTVoc/start-dev.sh"],
+      "port": 5173
+    }
+  ]
+}

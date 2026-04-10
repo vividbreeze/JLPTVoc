@@ -17,7 +17,8 @@
       "Bash(/opt/homebrew/bin/git push:*)",
       "Bash(npm install:*)",
       "Bash(/opt/homebrew/bin/npm install:*)",
-      "Bash(PATH=\"/usr/local/bin:$PATH\" npm install)"
+      "Bash(PATH=\"/usr/local/bin:$PATH\" npm install)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
