@@ -262,8 +262,33 @@ const vocabulary: VocabEntry[] = [
   { japanese: '眼鏡', hiragana: 'めがね', romaji: 'Megane', german: 'Brille', category: 'Kleidung' },
 ];
 
+// Migration: rename Japanese category names to German
+const CATEGORY_MIGRATIONS: Record<string, string> = {
+  'あいさつ': 'Begrüßung',
+  '数字':     'Zahlen',
+  '時間':     'Zeit',
+  '食べ物':   'Essen',
+  '飲み物':   'Getränke',
+  '家族':     'Familie',
+  '体':       'Körper',
+  '場所':     'Orte',
+  '乗り物':   'Verkehr',
+  '自然':     'Natur',
+  '動物':     'Tiere',
+  '形容詞':   'Adjektive',
+  '動詞':     'Verben',
+  '基本語':   'Grundwörter',
+  '学校':     'Schule',
+  '服':       'Kleidung',
+};
+
 export async function seed(): Promise<void> {
   await initDb();
+
+  // Run category migration regardless of seed state
+  for (const [jp, de] of Object.entries(CATEGORY_MIGRATIONS)) {
+    await db.execute({ sql: 'UPDATE vocabulary SET category = ? WHERE category = ?', args: [de, jp] });
+  }
 
   const existing = await db.execute('SELECT COUNT(*) as count FROM vocabulary');
   const count = existing.rows[0]?.count as number ?? 0;
