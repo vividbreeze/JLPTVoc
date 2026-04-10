@@ -34,7 +34,20 @@
       "Bash(PATH=\"/opt/homebrew/bin:$PATH\" /opt/homebrew/bin/node /Users/christoph/Projects/JLPTVoc/backend/node_modules/.bin/tsc --noEmit --project /Users/christoph/Projects/JLPTVoc/backend/tsconfig.json)",
       "Bash(command -v node)",
       "Bash(PATH=\"/usr/local/bin:$PATH\" /usr/local/bin/node --version)",
-      "Bash(/usr/local/bin/node -e \"const d=JSON.parse\\(require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\)\\); d.forEach\\(c=>console.log\\(c.category.padEnd\\(20\\), c.count\\)\\)\")"
+      "Bash(/usr/local/bin/node -e \"const d=JSON.parse\\(require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\)\\); d.forEach\\(c=>console.log\\(c.category.padEnd\\(20\\), c.count\\)\\)\")",
+      "Bash(/usr/bin/git status:*)",
+      "Bash(/usr/bin/git -C /Users/christoph/Projects/JLPTVoc diff --stat)",
+      "Bash(/usr/bin/git -C /Users/christoph/Projects/JLPTVoc status --short)",
+      "Bash(/usr/bin/git -C /Users/christoph/Projects/JLPTVoc log --oneline -5)",
+      "Bash(/usr/bin/git -C /Users/christoph/Projects/JLPTVoc diff HEAD frontend/src/App.tsx)",
+      "Bash(/usr/bin/git push:*)",
+      "Bash(docker login:*)",
+      "Read(//Applications/Docker.app/Contents/Resources/bin/**)",
+      "Read(//Applications/Docker.app/**)",
+      "Bash(/usr/local/bin/docker login:*)",
+      "Bash(/usr/local/bin/node ../node_modules/.bin/npm install @anthropic-ai/sdk)",
+      "Bash(PATH=\"/usr/local/bin:$PATH\" npm install @anthropic-ai/sdk)",
+      "Bash(PATH=\"/usr/local/bin:$PATH\" npm list @anthropic-ai/sdk)"
     ]
   }
 }

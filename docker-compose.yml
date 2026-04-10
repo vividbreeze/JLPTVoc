@@ -14,7 +14,6 @@ services:
       PORT: 3020
       DB_PATH: /app/data
       CORS_ORIGIN: "*"
-      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY}"
 
 volumes:
   jlptvoc-data:
