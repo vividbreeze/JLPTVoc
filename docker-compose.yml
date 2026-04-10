@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: vividbreeze/jlptvoc:latest
     container_name: jlptvoc
     restart: unless-stopped
     ports:
