@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { Vocabulary, Settings } from '../types';
 import type { QuizState } from '../hooks/useQuiz';
+import { fetchSentence } from '../api/client';
 
 interface Props {
   vocab: Vocabulary;
@@ -43,6 +44,30 @@ function JapaneseDisplay({ vocab, settings }: { vocab: Vocabulary; settings: Set
 }
 
 export default function QuizCard({ vocab, state, settings, onReveal, onRate }: Props) {
+  const [sentence, setSentence] = useState<{ jp: string; de: string } | null>(null);
+  const [sentenceLoading, setSentenceLoading] = useState(false);
+
+  // Fetch sentence when answer is revealed
+  useEffect(() => {
+    if (state !== 'answer') return;
+    // Use cached values from vocab if available
+    if (vocab.example_jp && vocab.example_de) {
+      setSentence({ jp: vocab.example_jp, de: vocab.example_de });
+      return;
+    }
+    setSentenceLoading(true);
+    setSentence(null);
+    fetchSentence(vocab.id)
+      .then(s => setSentence(s))
+      .catch(() => setSentence(null))
+      .finally(() => setSentenceLoading(false));
+  }, [state, vocab.id, vocab.example_jp, vocab.example_de]);
+
+  // Reset sentence when vocab changes
+  useEffect(() => {
+    setSentence(null);
+  }, [vocab.id]);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (state === 'question' && e.code === 'Space') { e.preventDefault(); onReveal(); }
@@ -106,10 +131,22 @@ export default function QuizCard({ vocab, state, settings, onReveal, onRate }: P
               zum Aufdecken
             </p>
           ) : (
-            <div className="text-center animate-fade-up">
+            <div className="text-center animate-fade-up w-full">
               {isDE
                 ? <JapaneseDisplay vocab={vocab} settings={settings} />
                 : <div className="text-3xl font-semibold text-white leading-snug">{vocab.german}</div>}
+
+              {/* Example sentence */}
+              <div className="mt-4 pt-3 border-t border-slate-600 w-full">
+                {sentenceLoading ? (
+                  <p className="text-xs text-slate-400 animate-pulse">Beispielsatz wird generiert…</p>
+                ) : sentence ? (
+                  <div className="space-y-1">
+                    <p className="text-sm font-japanese text-sky-200">{sentence.jp}</p>
+                    <p className="text-xs text-slate-400 italic">{sentence.de}</p>
+                  </div>
+                ) : null}
+              </div>
             </div>
           )}
         </div>

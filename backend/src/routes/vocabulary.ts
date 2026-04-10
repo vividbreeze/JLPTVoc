@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import db from '../database/db';
+import { generateSentence } from '../services/sentenceGenerator';
 
 const router = Router();
 
@@ -48,6 +49,35 @@ router.get('/', async (req: Request, res: Response) => {
 
   const result = await db.execute({ sql, args: category ? [category as string] : [] });
   res.json(result.rows);
+});
+
+// GET /api/vocabulary/:id/sentence — fetch cached or generate via Claude
+router.get('/:id/sentence', async (req: Request, res: Response) => {
+  try {
+    const row = await db.execute({
+      sql: 'SELECT id, japanese, german, example_jp, example_de FROM vocabulary WHERE id = ?',
+      args: [req.params.id],
+    });
+    if (!row.rows[0]) return res.status(404).json({ error: 'Not found' });
+
+    const vocab = row.rows[0] as { id: number; japanese: string; german: string; example_jp: string | null; example_de: string | null };
+
+    // Return cached sentence if available
+    if (vocab.example_jp && vocab.example_de) {
+      return res.json({ jp: vocab.example_jp, de: vocab.example_de });
+    }
+
+    // Generate via Claude and cache
+    const sentence = await generateSentence(vocab.japanese, vocab.german);
+    await db.execute({
+      sql: 'UPDATE vocabulary SET example_jp = ?, example_de = ? WHERE id = ?',
+      args: [sentence.jp, sentence.de, vocab.id],
+    });
+    res.json(sentence);
+  } catch (err) {
+    console.error('Sentence generation error:', err);
+    res.status(500).json({ error: 'Could not generate sentence' });
+  }
 });
 
 // GET /api/vocabulary/:id
