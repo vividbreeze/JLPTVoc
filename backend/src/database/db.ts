@@ -23,6 +23,7 @@ export async function initDb(): Promise<void> {
       jlpt_level TEXT NOT NULL DEFAULT 'N5',
       example_jp TEXT,
       example_de TEXT,
+      example_romaji TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 

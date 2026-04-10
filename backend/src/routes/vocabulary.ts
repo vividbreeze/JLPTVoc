@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import db from '../database/db';
 import { generateSentence } from '../services/sentenceGenerator';
+import { toRomaji } from '../services/romajiConverter';
 
 const router = Router();
 
@@ -55,25 +56,41 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id/sentence', async (req: Request, res: Response) => {
   try {
     const row = await db.execute({
-      sql: 'SELECT id, japanese, german, example_jp, example_de FROM vocabulary WHERE id = ?',
+      sql: 'SELECT id, japanese, german, example_jp, example_de, example_romaji FROM vocabulary WHERE id = ?',
       args: [req.params.id],
     });
     if (!row.rows[0]) return res.status(404).json({ error: 'Not found' });
 
-    const vocab = row.rows[0] as { id: number; japanese: string; german: string; example_jp: string | null; example_de: string | null };
+    const vocab = row.rows[0] as unknown as {
+      id: number; japanese: string; german: string;
+      example_jp: string | null; example_de: string | null; example_romaji: string | null;
+    };
 
-    // Return cached sentence if available
-    if (vocab.example_jp && vocab.example_de) {
-      return res.json({ jp: vocab.example_jp, de: vocab.example_de });
+    let jp = vocab.example_jp;
+    let de = vocab.example_de;
+    let romaji = vocab.example_romaji;
+
+    // Generate sentence via Claude if not cached
+    if (!jp || !de) {
+      const sentence = await generateSentence(vocab.japanese, vocab.german);
+      jp = sentence.jp;
+      de = sentence.de;
     }
 
-    // Generate via Claude and cache
-    const sentence = await generateSentence(vocab.japanese, vocab.german);
-    await db.execute({
-      sql: 'UPDATE vocabulary SET example_jp = ?, example_de = ? WHERE id = ?',
-      args: [sentence.jp, sentence.de, vocab.id],
-    });
-    res.json(sentence);
+    // Generate romaji if not cached
+    if (!romaji && jp) {
+      romaji = await toRomaji(jp);
+    }
+
+    // Persist any newly generated values
+    if (jp !== vocab.example_jp || de !== vocab.example_de || romaji !== vocab.example_romaji) {
+      await db.execute({
+        sql: 'UPDATE vocabulary SET example_jp = ?, example_de = ?, example_romaji = ? WHERE id = ?',
+        args: [jp, de, romaji, vocab.id],
+      });
+    }
+
+    res.json({ jp, de, romaji });
   } catch (err) {
     console.error('Sentence generation error:', err);
     res.status(500).json({ error: 'Could not generate sentence' });

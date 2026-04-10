@@ -1093,6 +1093,14 @@ export async function seed(): Promise<void> {
     console.log('🌸 V5: Deutsche Übersetzungen korrigiert (nur Substantive groß)...');
   }
 
+  // V6 migration: add example_romaji column if missing
+  try {
+    await db.execute('ALTER TABLE vocabulary ADD COLUMN example_romaji TEXT');
+    console.log('🌸 V6: Spalte example_romaji hinzugefügt.');
+  } catch {
+    // Column already exists — that's fine
+  }
+
   // Incremental insert — skip if (japanese, category) already exists
   let added = 0;
   for (const entry of vocabulary) {
@@ -1102,8 +1110,8 @@ export async function seed(): Promise<void> {
     });
     if (exists.rows.length === 0) {
       const result = await db.execute({
-        sql: `INSERT INTO vocabulary (japanese, hiragana, romaji, german, category, example_jp, example_de) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        args: [entry.japanese, entry.hiragana, entry.romaji, entry.german, entry.category, entry.example_jp ?? null, entry.example_de ?? null],
+        sql: `INSERT INTO vocabulary (japanese, hiragana, romaji, german, category, example_jp, example_de, example_romaji) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        args: [entry.japanese, entry.hiragana, entry.romaji, entry.german, entry.category, entry.example_jp ?? null, entry.example_de ?? null, (entry as any).example_romaji ?? null],
       });
       await db.execute({
         sql: `INSERT OR IGNORE INTO progress (vocabulary_id, score, review_count, next_review) VALUES (?, 0, 0, datetime('now'))`,

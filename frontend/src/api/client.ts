@@ -23,5 +23,5 @@ export const fetchStats = (): Promise<Stats> =>
 export const resetAllProgress = (): Promise<void> =>
   api.post('/progress/reset/all').then(r => r.data);
 
-export const fetchSentence = (id: number): Promise<{ jp: string; de: string }> =>
+export const fetchSentence = (id: number): Promise<{ jp: string; de: string; romaji: string }> =>
   api.get(`/vocabulary/${id}/sentence`).then(r => r.data);

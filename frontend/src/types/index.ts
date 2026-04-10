@@ -8,6 +8,7 @@ export interface Vocabulary {
   jlpt_level: string;
   example_jp?: string;
   example_de?: string;
+  example_romaji?: string;
   // progress fields (joined)
   score?: number;
   review_count?: number;
