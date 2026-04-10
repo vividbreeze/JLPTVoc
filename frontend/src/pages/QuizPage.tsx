@@ -31,7 +31,7 @@ export default function QuizPage({ settings }: Props) {
         <div className="text-5xl mb-4">⚠️</div>
         <p className="text-slate-300 mb-4">Server nicht erreichbar.</p>
         <button
-          onClick={loadNext}
+          onClick={() => loadNext()}
           className="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition-colors"
         >
           Erneut versuchen
@@ -51,7 +51,7 @@ export default function QuizPage({ settings }: Props) {
           Schau später wieder vorbei!
         </p>
         <button
-          onClick={loadNext}
+          onClick={() => loadNext()}
           className="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition-colors"
         >
           Nochmal prüfen
