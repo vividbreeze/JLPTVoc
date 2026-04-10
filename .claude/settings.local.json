@@ -18,7 +18,10 @@
       "Bash(npm install:*)",
       "Bash(/opt/homebrew/bin/npm install:*)",
       "Bash(PATH=\"/usr/local/bin:$PATH\" npm install)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node -e \":*)",
+      "Bash(export PATH=\"/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/24.4.1/bin:$PATH\")",
+      "Bash(npx tsc:*)"
     ]
   }
 }

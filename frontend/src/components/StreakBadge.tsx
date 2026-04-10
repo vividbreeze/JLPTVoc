@@ -9,11 +9,11 @@ export default function StreakBadge({ streak, sessionCount }: Props) {
   return (
     <div className="flex items-center gap-3 justify-center">
       {streak >= 3 && (
-        <div className="flex items-center gap-1 bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium animate-bounce-in">
+        <div className="flex items-center gap-1 bg-orange-900/50 text-orange-300 border border-orange-700/50 px-3 py-1 rounded-full text-sm font-medium">
           🔥 {streak} in Folge!
         </div>
       )}
-      <div className="text-sm text-gray-400">
+      <div className="text-sm text-slate-400">
         {sessionCount} Wörter heute
       </div>
     </div>

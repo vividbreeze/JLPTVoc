@@ -826,6 +826,180 @@ const vocabulary: VocabEntry[] = [
   { japanese: '名', hiragana: 'な・めい・みょう', romaji: 'na / mei / myou', german: 'Name / berühmt', category: 'Kanji' },
 ];
 
+// Simple N5-level example sentences per category
+const sentences: VocabEntry[] = [
+  // Begrüßung
+  { japanese: 'おはようございます。今日もよろしくお願いします。', hiragana: 'おはようございます。きょうもよろしくおねがいします。', romaji: 'Ohayou gozaimasu. Kyou mo yoroshiku onegaishimasu.', german: 'Guten Morgen. Ich bitte auch heute um Ihr Wohlwollen.', category: 'Begrüßung' },
+  { japanese: 'はじめまして。田中です。どうぞよろしく。', hiragana: 'はじめまして。たなかです。どうぞよろしく。', romaji: 'Hajimemashite. Tanaka desu. Douzo yoroshiku.', german: 'Schön, Sie kennenzulernen. Ich bin Tanaka. Freut mich.', category: 'Begrüßung' },
+  { japanese: 'おやすみなさい。また明日。', hiragana: 'おやすみなさい。またあした。', romaji: 'Oyasumi nasai. Mata ashita.', german: 'Gute Nacht. Bis morgen.', category: 'Begrüßung' },
+  { japanese: 'いってきます。いってらっしゃい。', hiragana: 'いってきます。いってらっしゃい。', romaji: 'Ittekimasu. Itterasshai.', german: 'Ich gehe jetzt. Mach\'s gut / Komm gut heim.', category: 'Begrüßung' },
+  { japanese: 'ありがとうございます。どういたしまして。', hiragana: 'ありがとうございます。どういたしまして。', romaji: 'Arigatou gozaimasu. Dou itashimashite.', german: 'Vielen Dank. Bitte sehr / Gern geschehen.', category: 'Begrüßung' },
+  { japanese: 'すみません、名前は何ですか？', hiragana: 'すみません、なまえはなんですか？', romaji: 'Sumimasen, namae wa nan desu ka?', german: 'Entschuldigung, wie heißen Sie?', category: 'Begrüßung' },
+
+  // Zahlen
+  { japanese: 'リンゴが三つあります。', hiragana: 'りんごがみっつあります。', romaji: 'Ringo ga mittsu arimasu.', german: 'Es gibt drei Äpfel.', category: 'Zahlen' },
+  { japanese: 'これはいくらですか？五百円です。', hiragana: 'これはいくらですか？ごひゃくえんです。', romaji: 'Kore wa ikura desu ka? Gohyaku en desu.', german: 'Wie viel kostet das? Es kostet 500 Yen.', category: 'Zahlen' },
+  { japanese: '私は二十歳です。', hiragana: 'わたしははたちです。', romaji: 'Watashi wa hatachi desu.', german: 'Ich bin zwanzig Jahre alt.', category: 'Zahlen' },
+  { japanese: '電話番号は何番ですか？', hiragana: 'でんわばんごうはなんばんですか？', romaji: 'Denwa bangou wa nanban desu ka?', german: 'Was ist Ihre Telefonnummer?', category: 'Zahlen' },
+  { japanese: '百人の学生がいます。', hiragana: 'ひゃくにんのがくせいがいます。', romaji: 'Hyaku nin no gakusei ga imasu.', german: 'Es gibt hundert Studenten.', category: 'Zahlen' },
+
+  // Zeit
+  { japanese: '今、何時ですか？三時です。', hiragana: 'いま、なんじですか？さんじです。', romaji: 'Ima, nanji desu ka? Sanji desu.', german: 'Wie viel Uhr ist es jetzt? Es ist drei Uhr.', category: 'Zeit' },
+  { japanese: '毎朝七時に起きます。', hiragana: 'まいあさしちじにおきます。', romaji: 'Mai asa shichiji ni okimasu.', german: 'Ich stehe jeden Morgen um 7 Uhr auf.', category: 'Zeit' },
+  { japanese: '今日は何曜日ですか？', hiragana: 'きょうはなんようびですか？', romaji: 'Kyou wa nan youbi desu ka?', german: 'Welcher Tag ist heute?', category: 'Zeit' },
+  { japanese: '授業は九時から十二時までです。', hiragana: 'じゅぎょうはくじからじゅうにじまでです。', romaji: 'Jugyou wa kuji kara juuniji made desu.', german: 'Der Unterricht ist von 9 bis 12 Uhr.', category: 'Zeit' },
+  { japanese: '昨日は早く寝ました。', hiragana: 'きのうははやくねました。', romaji: 'Kinou wa hayaku nemashita.', german: 'Gestern bin ich früh schlafen gegangen.', category: 'Zeit' },
+
+  // Wochentage
+  { japanese: '月曜日に学校があります。', hiragana: 'げつようびにがっこうがあります。', romaji: 'Getsuyoubi ni gakkou ga arimasu.', german: 'Am Montag habe ich Schule.', category: 'Wochentage' },
+  { japanese: '土曜日と日曜日は休みです。', hiragana: 'どようびとにちようびはやすみです。', romaji: 'Doyoubi to nichiyoubi wa yasumi desu.', german: 'Samstag und Sonntag sind frei.', category: 'Wochentage' },
+  { japanese: '金曜日に友達と映画を見ます。', hiragana: 'きんようびにともだちとえいがをみます。', romaji: 'Kin\'youbi ni tomodachi to eiga wo mimasu.', german: 'Am Freitag schaue ich mit Freunden einen Film.', category: 'Wochentage' },
+  { japanese: '水曜日はテストがあります。', hiragana: 'すいようびはてすとがあります。', romaji: 'Suiyoubi wa tesuto ga arimasu.', german: 'Am Mittwoch gibt es einen Test.', category: 'Wochentage' },
+  { japanese: '毎週火曜日に日本語を勉強します。', hiragana: 'まいしゅうかようびににほんごをべんきょうします。', romaji: 'Maishuu kayoubi ni nihongo wo benkyou shimasu.', german: 'Ich lerne jeden Dienstag Japanisch.', category: 'Wochentage' },
+
+  // Monate
+  { japanese: '一月は寒いです。', hiragana: 'いちがつはさむいです。', romaji: 'Ichigatsu wa samui desu.', german: 'Der Januar ist kalt.', category: 'Monate' },
+  { japanese: '四月に日本の学校が始まります。', hiragana: 'しがつににほんのがっこうがはじまります。', romaji: 'Shigatsu ni Nihon no gakkou ga hajimarimasu.', german: 'Im April beginnt das Schuljahr in Japan.', category: 'Monate' },
+  { japanese: '誕生日は何月ですか？', hiragana: 'たんじょうびはなんがつですか？', romaji: 'Tanjoubi wa nangatsu desu ka?', german: 'In welchem Monat haben Sie Geburtstag?', category: 'Monate' },
+  { japanese: '三月に桜が咲きます。', hiragana: 'さんがつにさくらがさきます。', romaji: 'Sangatsu ni sakura ga sakimasu.', german: 'Im März blühen die Kirschblüten.', category: 'Monate' },
+  { japanese: '十二月はクリスマスがあります。', hiragana: 'じゅうにがつはくりすますがあります。', romaji: 'Juunigatsu wa Kurisumasu ga arimasu.', german: 'Im Dezember ist Weihnachten.', category: 'Monate' },
+
+  // Essen
+  { japanese: 'すしが大好きです。', hiragana: 'すしがだいすきです。', romaji: 'Sushi ga daisuki desu.', german: 'Ich mag Sushi sehr gerne.', category: 'Essen' },
+  { japanese: '昼ごはんはラーメンを食べました。', hiragana: 'ひるごはんはらーめんをたべました。', romaji: 'Hirugohan wa raamen wo tabemashita.', german: 'Zum Mittagessen habe ich Ramen gegessen.', category: 'Essen' },
+  { japanese: 'ごはんを食べてください。', hiragana: 'ごはんをたべてください。', romaji: 'Gohan wo tabete kudasai.', german: 'Bitte essen Sie den Reis.', category: 'Essen' },
+  { japanese: 'このパンはおいしいですね。', hiragana: 'このぱんはおいしいですね。', romaji: 'Kono pan wa oishii desu ne.', german: 'Dieses Brot ist lecker, nicht wahr?', category: 'Essen' },
+  { japanese: '朝ごはんに卵を食べます。', hiragana: 'あさごはんにたまごをたべます。', romaji: 'Asagohan ni tamago wo tabemasu.', german: 'Zum Frühstück esse ich Eier.', category: 'Essen' },
+  { japanese: 'もう少し肉をください。', hiragana: 'もうすこしにくをください。', romaji: 'Mou sukoshi niku wo kudasai.', german: 'Geben Sie mir bitte noch etwas Fleisch.', category: 'Essen' },
+
+  // Getränke
+  { japanese: 'お茶を一杯飲みましょう。', hiragana: 'おちゃをいっぱいのみましょう。', romaji: 'Ocha wo ippai nomimashou.', german: 'Lass uns eine Tasse Tee trinken.', category: 'Getränke' },
+  { japanese: 'コーヒーに砂糖を入れますか？', hiragana: 'こーひーにさとうをいれますか？', romaji: 'Koohii ni satou wo iremasu ka?', german: 'Tun Sie Zucker in den Kaffee?', category: 'Getränke' },
+  { japanese: '水をください。', hiragana: 'みずをください。', romaji: 'Mizu wo kudasai.', german: 'Geben Sie mir bitte Wasser.', category: 'Getränke' },
+  { japanese: 'のどが渇きました。ジュースを飲みたいです。', hiragana: 'のどがかわきました。じゅーすをのみたいです。', romaji: 'Nodo ga kawakimashita. Juusu wo nomitai desu.', german: 'Ich habe Durst. Ich möchte Saft trinken.', category: 'Getränke' },
+  { japanese: '毎朝ミルクを飲みます。', hiragana: 'まいあさみるくをのみます。', romaji: 'Mai asa miruku wo nomimasu.', german: 'Jeden Morgen trinke ich Milch.', category: 'Getränke' },
+
+  // Familie
+  { japanese: '私の家族は四人です。', hiragana: 'わたしのかぞくはよにんです。', romaji: 'Watashi no kazoku wa yonin desu.', german: 'Meine Familie besteht aus vier Personen.', category: 'Familie' },
+  { japanese: '兄は大学生です。', hiragana: 'あにはだいがくせいです。', romaji: 'Ani wa daigakusei desu.', german: 'Mein älterer Bruder ist Student.', category: 'Familie' },
+  { japanese: 'お母さんは料理が上手です。', hiragana: 'おかあさんはりょうりがじょうずです。', romaji: 'Okaasan wa ryouri ga jouzu desu.', german: 'Meine Mutter ist gut im Kochen.', category: 'Familie' },
+  { japanese: 'お父さんは会社員です。', hiragana: 'おとうさんはかいしゃいんです。', romaji: 'Otousan wa kaishain desu.', german: 'Mein Vater ist Angestellter.', category: 'Familie' },
+  { japanese: '妹は小学生です。', hiragana: 'いもうとはしょうがくせいです。', romaji: 'Imouto wa shougakusei desu.', german: 'Meine jüngere Schwester geht in die Grundschule.', category: 'Familie' },
+  { japanese: '祖父母は田舎に住んでいます。', hiragana: 'そふぼはいなかにすんでいます。', romaji: 'Sofubo wa inaka ni sunde imasu.', german: 'Meine Großeltern wohnen auf dem Land.', category: 'Familie' },
+
+  // Körper
+  { japanese: '頭が痛いです。', hiragana: 'あたまがいたいです。', romaji: 'Atama ga itai desu.', german: 'Ich habe Kopfschmerzen.', category: 'Körper' },
+  { japanese: '手を洗ってください。', hiragana: 'てをあらってください。', romaji: 'Te wo aratte kudasai.', german: 'Bitte waschen Sie Ihre Hände.', category: 'Körper' },
+  { japanese: '目が悪いので、めがねをかけています。', hiragana: 'めがわるいので、めがねをかけています。', romaji: 'Me ga warui node, megane wo kakete imasu.', german: 'Da meine Augen schlecht sind, trage ich eine Brille.', category: 'Körper' },
+  { japanese: '足が疲れました。少し休みましょう。', hiragana: 'あしがつかれました。すこしやすみましょう。', romaji: 'Ashi ga tsukaremashita. Sukoshi yasumimashou.', german: 'Meine Beine sind müde. Lass uns kurz pausieren.', category: 'Körper' },
+  { japanese: '鼻が高いですね。', hiragana: 'はながたかいですね。', romaji: 'Hana ga takai desu ne.', german: 'Sie haben eine hohe Nase / Sie sind sehr stolz, nicht wahr?', category: 'Körper' },
+
+  // Orte
+  { japanese: '駅はどこですか？', hiragana: 'えきはどこですか？', romaji: 'Eki wa doko desu ka?', german: 'Wo ist der Bahnhof?', category: 'Orte' },
+  { japanese: '学校の近くにコンビニがあります。', hiragana: 'がっこうのちかくにこんびにがあります。', romaji: 'Gakkou no chikaku ni konbini ga arimasu.', german: 'In der Nähe der Schule gibt es einen Convenience Store.', category: 'Orte' },
+  { japanese: '図書館で本を借りました。', hiragana: 'としょかんでほんをかりました。', romaji: 'Toshokan de hon wo karimashita.', german: 'Ich habe in der Bibliothek ein Buch ausgeliehen.', category: 'Orte' },
+  { japanese: '病院はあの建物の中にあります。', hiragana: 'びょういんはあのたてもののなかにあります。', romaji: 'Byouin wa ano tatemono no naka ni arimasu.', german: 'Das Krankenhaus befindet sich in jenem Gebäude.', category: 'Orte' },
+  { japanese: '公園でよく散歩します。', hiragana: 'こうえんでよくさんぽします。', romaji: 'Kouen de yoku sanpo shimasu.', german: 'Ich spaziere oft im Park.', category: 'Orte' },
+  { japanese: 'スーパーで野菜を買いました。', hiragana: 'すーぱーでやさいをかいました。', romaji: 'Suupaa de yasai wo kaimashita.', german: 'Ich habe im Supermarkt Gemüse gekauft.', category: 'Orte' },
+
+  // Verkehr
+  { japanese: '電車で学校に行きます。', hiragana: 'でんしゃでがっこうにいきます。', romaji: 'Densha de gakkou ni ikimasu.', german: 'Ich fahre mit dem Zug zur Schule.', category: 'Verkehr' },
+  { japanese: 'バスは何時に来ますか？', hiragana: 'ばすはなんじにきますか？', romaji: 'Basu wa nanji ni kimasu ka?', german: 'Um wie viel Uhr kommt der Bus?', category: 'Verkehr' },
+  { japanese: 'タクシーに乗ってください。', hiragana: 'たくしーにのってください。', romaji: 'Takushii ni notte kudasai.', german: 'Bitte steigen Sie in ein Taxi.', category: 'Verkehr' },
+  { japanese: '自転車で駅まで行きます。', hiragana: 'じてんしゃでえきまでいきます。', romaji: 'Jitensha de eki made ikimasu.', german: 'Ich fahre mit dem Fahrrad bis zum Bahnhof.', category: 'Verkehr' },
+  { japanese: '飛行機はもう出発しましたか？', hiragana: 'ひこうきはもうしゅっぱつしましたか？', romaji: 'Hikouki wa mou shuppatsu shimashita ka?', german: 'Ist das Flugzeug schon abgeflogen?', category: 'Verkehr' },
+
+  // Natur
+  { japanese: '今日は天気がいいですね。', hiragana: 'きょうはてんきがいいですね。', romaji: 'Kyou wa tenki ga ii desu ne.', german: 'Heute ist das Wetter schön, nicht wahr?', category: 'Natur' },
+  { japanese: '山の上に雪があります。', hiragana: 'やまのうえにゆきがあります。', romaji: 'Yama no ue ni yuki ga arimasu.', german: 'Auf dem Berggipfel liegt Schnee.', category: 'Natur' },
+  { japanese: '川の水がとてもきれいです。', hiragana: 'かわのみずがとてもきれいです。', romaji: 'Kawa no mizu ga totemo kirei desu.', german: 'Das Flusswasser ist sehr klar.', category: 'Natur' },
+  { japanese: '春になると花が咲きます。', hiragana: 'はるになるとはながさきます。', romaji: 'Haru ni naru to hana ga sakimasu.', german: 'Wenn es Frühling wird, blühen die Blumen.', category: 'Natur' },
+  { japanese: '海で泳ぎたいです。', hiragana: 'うみでおよぎたいです。', romaji: 'Umi de oyogitai desu.', german: 'Ich möchte im Meer schwimmen.', category: 'Natur' },
+  { japanese: '木の下で休みましょう。', hiragana: 'きのしたでやすみましょう。', romaji: 'Ki no shita de yasumimashou.', german: 'Lass uns unter dem Baum ausruhen.', category: 'Natur' },
+
+  // Tiere
+  { japanese: '猫が二匹います。', hiragana: 'ねこがにひきいます。', romaji: 'Neko ga nihiki imasu.', german: 'Es gibt zwei Katzen.', category: 'Tiere' },
+  { japanese: '犬は散歩が好きです。', hiragana: 'いぬはさんぽがすきです。', romaji: 'Inu wa sanpo ga suki desu.', german: 'Hunde mögen spazieren gehen.', category: 'Tiere' },
+  { japanese: '公園に鳥がたくさんいます。', hiragana: 'こうえんにとりがたくさんいます。', romaji: 'Kouen ni tori ga takusan imasu.', german: 'Im Park gibt es viele Vögel.', category: 'Tiere' },
+  { japanese: 'あの魚はとても大きいですね。', hiragana: 'あのさかなはとてもおおきいですね。', romaji: 'Ano sakana wa totemo ookii desu ne.', german: 'Dieser Fisch ist sehr groß, nicht wahr?', category: 'Tiere' },
+  { japanese: '動物園でパンダを見ました。', hiragana: 'どうぶつえんでぱんだをみました。', romaji: 'Doubutsuen de panda wo mimashita.', german: 'Im Zoo habe ich einen Panda gesehen.', category: 'Tiere' },
+
+  // Farben
+  { japanese: 'この赤い花はきれいですね。', hiragana: 'このあかいはなはきれいですね。', romaji: 'Kono akai hana wa kirei desu ne.', german: 'Diese rote Blume ist schön, nicht wahr?', category: 'Farben' },
+  { japanese: '青い空が好きです。', hiragana: 'あおいそらがすきです。', romaji: 'Aoi sora ga suki desu.', german: 'Ich mag den blauen Himmel.', category: 'Farben' },
+  { japanese: '白いシャツを着ています。', hiragana: 'しろいしゃつをきています。', romaji: 'Shiroi shatsu wo kite imasu.', german: 'Ich trage ein weißes Hemd.', category: 'Farben' },
+  { japanese: '黄色いバナナを食べました。', hiragana: 'きいろいばなながをたべました。', romaji: 'Kiiroi banana wo tabemashita.', german: 'Ich habe eine gelbe Banane gegessen.', category: 'Farben' },
+  { japanese: '緑のバッグはどこですか？', hiragana: 'みどりのばっぐはどこですか？', romaji: 'Midori no baggu wa doko desu ka?', german: 'Wo ist die grüne Tasche?', category: 'Farben' },
+
+  // Wetter
+  { japanese: '今日は雨が降っています。', hiragana: 'きょうはあめがふっています。', romaji: 'Kyou wa ame ga futte imasu.', german: 'Heute regnet es.', category: 'Wetter' },
+  { japanese: '傘を持ってきてください。', hiragana: 'かさをもってきてください。', romaji: 'Kasa wo motte kite kudasai.', german: 'Bringen Sie bitte einen Regenschirm mit.', category: 'Wetter' },
+  { japanese: '明日は雪が降るかもしれません。', hiragana: 'あしたはゆきがふるかもしれません。', romaji: 'Ashita wa yuki ga furu kamo shiremasen.', german: 'Morgen könnte es schneien.', category: 'Wetter' },
+  { japanese: '今日はとても暑いですね。', hiragana: 'きょうはとてもあついですね。', romaji: 'Kyou wa totemo atsui desu ne.', german: 'Heute ist es sehr heiß, nicht wahr?', category: 'Wetter' },
+  { japanese: '風が強いから、気をつけてください。', hiragana: 'かぜがつよいから、きをつけてください。', romaji: 'Kaze ga tsuyoi kara, ki wo tsukete kudasai.', german: 'Weil der Wind stark ist, bitte passen Sie auf.', category: 'Wetter' },
+
+  // Wohnung
+  { japanese: '私の部屋はあまり広くないです。', hiragana: 'わたしのへやはあまりひろくないです。', romaji: 'Watashi no heya wa amari hirokunai desu.', german: 'Mein Zimmer ist nicht sehr groß.', category: 'Wohnung' },
+  { japanese: 'リビングにテレビがあります。', hiragana: 'りびんぐにてれびがあります。', romaji: 'Ribingu ni terebi ga arimasu.', german: 'Im Wohnzimmer gibt es einen Fernseher.', category: 'Wohnung' },
+  { japanese: 'お風呂に入ってから寝ます。', hiragana: 'おふろにはいってからねます。', romaji: 'Ofuro ni haitte kara nemasu.', german: 'Ich bade und schlafe dann.', category: 'Wohnung' },
+  { japanese: '台所で料理をします。', hiragana: 'だいどころでりょうりをします。', romaji: 'Daidokoro de ryouri wo shimasu.', german: 'Ich koche in der Küche.', category: 'Wohnung' },
+  { japanese: 'ドアを閉めてください。', hiragana: 'どあをしめてください。', romaji: 'Doa wo shimete kudasai.', german: 'Bitte schließen Sie die Tür.', category: 'Wohnung' },
+  { japanese: '窓から富士山が見えます。', hiragana: 'まどからふじさんがみえます。', romaji: 'Mado kara Fujisan ga miemasu.', german: 'Vom Fenster aus kann man den Fuji sehen.', category: 'Wohnung' },
+
+  // Adjektive
+  { japanese: 'このケーキはとても甘いです。', hiragana: 'このけーきはとてもあまいです。', romaji: 'Kono keeki wa totemo amai desu.', german: 'Dieser Kuchen ist sehr süß.', category: 'Adjektive' },
+  { japanese: '今日の宿題は難しかったです。', hiragana: 'きょうのしゅくだいはむずかしかったです。', romaji: 'Kyou no shukudai wa muzukashikatta desu.', german: 'Die heutige Hausaufgabe war schwierig.', category: 'Adjektive' },
+  { japanese: '日本語の勉強は楽しいです。', hiragana: 'にほんごのべんきょうはたのしいです。', romaji: 'Nihongo no benkyou wa tanoshii desu.', german: 'Das Lernen der japanischen Sprache macht Spaß.', category: 'Adjektive' },
+  { japanese: 'この店は安くておいしいです。', hiragana: 'このみせはやすくておいしいです。', romaji: 'Kono mise wa yasukute oishii desu.', german: 'Dieses Restaurant ist günstig und lecker.', category: 'Adjektive' },
+  { japanese: '新しいスマホはとても便利です。', hiragana: 'あたらしいすまほはとてもべんりです。', romaji: 'Atarashii sumaho wa totemo benri desu.', german: 'Das neue Smartphone ist sehr praktisch.', category: 'Adjektive' },
+
+  // Verben
+  { japanese: '毎日日本語を勉強しています。', hiragana: 'まいにちにほんごをべんきょうしています。', romaji: 'Mainichi nihongo wo benkyou shite imasu.', german: 'Ich lerne täglich Japanisch.', category: 'Verben' },
+  { japanese: '昨日は六時間寝ました。', hiragana: 'きのうはろくじかんねました。', romaji: 'Kinou wa roku jikan nemashita.', german: 'Gestern habe ich sechs Stunden geschlafen.', category: 'Verben' },
+  { japanese: '友達に手紙を書きました。', hiragana: 'ともだちにてがみをかきました。', romaji: 'Tomodachi ni tegami wo kakimashita.', german: 'Ich habe einem Freund einen Brief geschrieben.', category: 'Verben' },
+  { japanese: '音楽を聞きながら走ります。', hiragana: 'おんがくをききながらはしります。', romaji: 'Ongaku wo kiki nagara hashirimasu.', german: 'Ich laufe, während ich Musik höre.', category: 'Verben' },
+  { japanese: '本を読んでから映画を見ました。', hiragana: 'ほんをよんでからえいがをみました。', romaji: 'Hon wo yonde kara eiga wo mimashita.', german: 'Ich habe zuerst das Buch gelesen und dann einen Film gesehen.', category: 'Verben' },
+  { japanese: '母に電話をかけました。', hiragana: 'ははにでんわをかけました。', romaji: 'Haha ni denwa wo kakemashita.', german: 'Ich habe meine Mutter angerufen.', category: 'Verben' },
+
+  // Grundwörter
+  { japanese: 'これは何ですか？', hiragana: 'これはなんですか？', romaji: 'Kore wa nan desu ka?', german: 'Was ist das?', category: 'Grundwörter' },
+  { japanese: 'あれはだれのかばんですか？', hiragana: 'あれはだれのかばんですか？', romaji: 'Are wa dare no kaban desu ka?', german: 'Wessen Tasche ist das?', category: 'Grundwörter' },
+  { japanese: 'どこでも日本語を話せますか？', hiragana: 'どこでもにほんごをはなせますか？', romaji: 'Doko demo nihongo wo hanasemasu ka?', german: 'Können Sie überall Japanisch sprechen?', category: 'Grundwörter' },
+  { japanese: 'はい、わかりました。ありがとうございます。', hiragana: 'はい、わかりました。ありがとうございます。', romaji: 'Hai, wakarimashita. Arigatou gozaimasu.', german: 'Ja, verstanden. Vielen Dank.', category: 'Grundwörter' },
+  { japanese: 'もう一度言ってください。', hiragana: 'もういちどいってください。', romaji: 'Mou ichido itte kudasai.', german: 'Bitte sagen Sie das noch einmal.', category: 'Grundwörter' },
+  { japanese: 'どのくらいかかりますか？', hiragana: 'どのくらいかかりますか？', romaji: 'Dono kurai kakarimasu ka?', german: 'Wie lange dauert es?', category: 'Grundwörter' },
+
+  // Schule
+  { japanese: '今日の授業はとても面白かったです。', hiragana: 'きょうのじゅぎょうはとてもおもしろかったです。', romaji: 'Kyou no jugyou wa totemo omoshirokatta desu.', german: 'Der heutige Unterricht war sehr interessant.', category: 'Schule' },
+  { japanese: '先生に質問があります。', hiragana: 'せんせいにしつもんがあります。', romaji: 'Sensei ni shitsumon ga arimasu.', german: 'Ich habe eine Frage an den Lehrer.', category: 'Schule' },
+  { japanese: '宿題を忘れました。すみません。', hiragana: 'しゅくだいをわすれました。すみません。', romaji: 'Shukudai wo wasuremashita. Sumimasen.', german: 'Ich habe die Hausaufgaben vergessen. Entschuldigung.', category: 'Schule' },
+  { japanese: '図書館で一緒に勉強しましょう。', hiragana: 'としょかんでいっしょにべんきょうしましょう。', romaji: 'Toshokan de issho ni benkyou shimashou.', german: 'Lass uns zusammen in der Bibliothek lernen.', category: 'Schule' },
+  { japanese: '来週テストがあるから、頑張ってください。', hiragana: 'らいしゅうてすとがあるから、がんばってください。', romaji: 'Raishuu tesuto ga aru kara, ganbatte kudasai.', german: 'Nächste Woche ist ein Test, also geben Sie Ihr Bestes.', category: 'Schule' },
+  { japanese: '鉛筆を貸してください。', hiragana: 'えんぴつをかしてください。', romaji: 'Enpitsu wo kashite kudasai.', german: 'Leihen Sie mir bitte einen Bleistift.', category: 'Schule' },
+
+  // Kleidung
+  { japanese: '今日は寒いからコートを着ます。', hiragana: 'きょうはさむいからこーとをきます。', romaji: 'Kyou wa samui kara kooto wo kimasu.', german: 'Heute ist es kalt, also trage ich einen Mantel.', category: 'Kleidung' },
+  { japanese: 'この服はどこで買いましたか？', hiragana: 'このふくはどこでかいましたか？', romaji: 'Kono fuku wa doko de kaimashita ka?', german: 'Wo haben Sie diese Kleidung gekauft?', category: 'Kleidung' },
+  { japanese: '赤いドレスを着た人は誰ですか？', hiragana: 'あかいどれすをきたひとはだれですか？', romaji: 'Akai doresu wo kita hito wa dare desu ka?', german: 'Wer ist die Person im roten Kleid?', category: 'Kleidung' },
+  { japanese: 'ズボンが大きすぎます。', hiragana: 'ずぼんがおおきすぎます。', romaji: 'Zubon ga ooki sugimasu.', german: 'Die Hose ist zu groß.', category: 'Kleidung' },
+  { japanese: '新しい靴を買いたいです。', hiragana: 'あたらしいくつをかいたいです。', romaji: 'Atarashii kutsu wo kaitai desu.', german: 'Ich möchte neue Schuhe kaufen.', category: 'Kleidung' },
+
+  // Gesundheit
+  { japanese: '病院に行ったほうがいいですよ。', hiragana: 'びょういんにいったほうがいいですよ。', romaji: 'Byouin ni itta hou ga ii desu yo.', german: 'Sie sollten lieber ins Krankenhaus gehen.', category: 'Gesundheit' },
+  { japanese: '熱があります。薬を飲みました。', hiragana: 'ねつがあります。くすりをのみました。', romaji: 'Netsu ga arimasu. Kusuri wo nomimashita.', german: 'Ich habe Fieber. Ich habe Medizin genommen.', category: 'Gesundheit' },
+  { japanese: '毎日運動することは大切です。', hiragana: 'まいにちうんどうすることはたいせつです。', romaji: 'Mainichi undou suru koto wa taisetsu desu.', german: 'Es ist wichtig, täglich Sport zu treiben.', category: 'Gesundheit' },
+  { japanese: '早く良くなってください。', hiragana: 'はやくよくなってください。', romaji: 'Hayaku yoku natte kudasai.', german: 'Werden Sie bitte schnell gesund.', category: 'Gesundheit' },
+  { japanese: '歯が痛いので、歯医者に行きます。', hiragana: 'はがいたいので、はいしゃにいきます。', romaji: 'Ha ga itai node, haisha ni ikimasu.', german: 'Weil mein Zahn wehtut, gehe ich zum Zahnarzt.', category: 'Gesundheit' },
+  { japanese: '水をたくさん飲んでください。', hiragana: 'みずをたくさんのんでください。', romaji: 'Mizu wo takusan nonde kudasai.', german: 'Trinken Sie bitte viel Wasser.', category: 'Gesundheit' },
+
+  // Kanji (example sentences using common kanji)
+  { japanese: '日本語の漢字は難しいです。', hiragana: 'にほんごのかんじはむずかしいです。', romaji: 'Nihongo no kanji wa muzukashii desu.', german: 'Die Kanji der japanischen Sprache sind schwierig.', category: 'Kanji' },
+  { japanese: '毎日一つ新しい漢字を覚えます。', hiragana: 'まいにちひとつあたらしいかんじをおぼえます。', romaji: 'Mainichi hitotsu atarashii kanji wo oboemasu.', german: 'Ich lerne täglich ein neues Kanji.', category: 'Kanji' },
+  { japanese: '山と川という漢字を書いてください。', hiragana: 'やまとかわというかんじをかいてください。', romaji: 'Yama to kawa to iu kanji wo kaite kudasai.', german: 'Bitte schreiben Sie die Kanji für Berg und Fluss.', category: 'Kanji' },
+  { japanese: '人という漢字は一画です。', hiragana: 'ひとというかんじはいっかくです。', romaji: 'Hito to iu kanji wa ikkaku desu.', german: 'Das Kanji für Mensch hat einen Strich.', category: 'Kanji' },
+  { japanese: '火曜日の「火」は火を意味します。', hiragana: 'かようびの「か」はひをいみします。', romaji: 'Kayoubi no "ka" wa hi wo imishimasu.', german: 'Das „Ka" in Dienstag bedeutet Feuer.', category: 'Kanji' },
+];
+
 // Migration: rename Japanese category names to German
 const CATEGORY_MIGRATIONS: Record<string, string> = {
   'あいさつ': 'Begrüßung',
@@ -856,7 +1030,7 @@ export async function seed(): Promise<void> {
 
   // Insert new entries — skip if (japanese, category) already exists
   let added = 0;
-  for (const entry of vocabulary) {
+  for (const entry of [...vocabulary, ...sentences]) {
     const exists = await db.execute({
       sql: 'SELECT id FROM vocabulary WHERE japanese = ? AND category = ?',
       args: [entry.japanese, entry.category],
@@ -868,7 +1042,7 @@ export async function seed(): Promise<void> {
       });
       await db.execute({
         sql: `INSERT OR IGNORE INTO progress (vocabulary_id, score, review_count, next_review) VALUES (?, 0, 0, datetime('now'))`,
-        args: [result.lastInsertRowid],
+        args: [result.lastInsertRowid ?? 0],
       });
       added++;
     }

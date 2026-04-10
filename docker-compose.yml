@@ -9,12 +9,12 @@ services:
     container_name: jlptvoc
     restart: unless-stopped
     ports:
-      - "3020:3001"
+      - "3020:3020"
     volumes:
       - jlptvoc-data:/app/data
     environment:
       NODE_ENV: production
-      PORT: 3001
+      PORT: 3020
       DB_PATH: /app/data
       CORS_ORIGIN: "*"
 

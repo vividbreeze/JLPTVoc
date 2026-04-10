@@ -19,7 +19,7 @@ export default function QuizPage({ settings }: Props) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <div className="text-5xl animate-spin">🌸</div>
-        <p className="text-gray-400">Lade nächstes Wort…</p>
+        <p className="text-slate-300">Lade nächstes Wort…</p>
       </div>
     );
   }
@@ -28,10 +28,10 @@ export default function QuizPage({ settings }: Props) {
     return (
       <div className="text-center py-16">
         <div className="text-5xl mb-4">⚠️</div>
-        <p className="text-gray-500 mb-4">Server nicht erreichbar.</p>
+        <p className="text-slate-300 mb-4">Server nicht erreichbar.</p>
         <button
           onClick={loadNext}
-          className="px-6 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600"
+          className="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition-colors"
         >
           Erneut versuchen
         </button>
@@ -43,15 +43,15 @@ export default function QuizPage({ settings }: Props) {
     return (
       <div className="text-center py-16">
         <div className="text-6xl mb-4">🎉</div>
-        <h2 className="text-2xl font-bold text-gray-700 mb-2">Alles gelernt!</h2>
-        <p className="text-gray-500 mb-6">
+        <h2 className="text-2xl font-bold text-slate-100 mb-2">Alles gelernt!</h2>
+        <p className="text-slate-300 mb-6">
           Keine Vokabeln zur Wiederholung fällig.{' '}
           {settings.selectedCategory ? 'Probiere eine andere Kategorie oder ' : ''}
           Schau später wieder vorbei!
         </p>
         <button
           onClick={loadNext}
-          className="px-6 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors"
+          className="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition-colors"
         >
           Nochmal prüfen
         </button>

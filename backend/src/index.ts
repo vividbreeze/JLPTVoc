@@ -8,7 +8,7 @@ import progressRoutes from './routes/progress';
 import statsRoutes from './routes/stats';
 
 const app = express();
-const PORT = parseInt(process.env.PORT || '3020', 10);
+const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT || '3020', 10);
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173',

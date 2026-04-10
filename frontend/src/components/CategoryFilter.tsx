@@ -42,8 +42,8 @@ export default function CategoryFilter({ categories, selected, onChange }: Props
           onClick={() => onChange(null)}
           className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all
             ${selected === null
-              ? 'bg-pink-500 text-white shadow scale-105'
-              : 'bg-white text-gray-600 hover:bg-pink-50 border border-pink-200'}`}
+              ? 'bg-indigo-600 text-white shadow scale-105'
+              : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'}`}
         >
           🌸 Alle ({total})
         </button>
@@ -53,8 +53,8 @@ export default function CategoryFilter({ categories, selected, onChange }: Props
             onClick={() => onChange(cat.category)}
             className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all
               ${selected === cat.category
-                ? 'bg-pink-500 text-white shadow scale-105'
-                : 'bg-white text-gray-600 hover:bg-pink-50 border border-pink-200'}`}
+                ? 'bg-indigo-600 text-white shadow scale-105'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'}`}
           >
             {CATEGORY_EMOJI[cat.category] ?? '📖'} {cat.category} ({cat.count})
           </button>

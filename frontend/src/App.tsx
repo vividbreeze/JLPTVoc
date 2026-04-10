@@ -28,58 +28,95 @@ export default function App() {
   useEffect(() => { fetchCategories().then(setCategories).catch(console.error); }, []);
   useEffect(() => { localStorage.setItem('jlptvoc-settings', JSON.stringify(settings)); }, [settings]);
 
+  const isQuiz = tab === 'quiz';
+
+  function goToStats() {
+    setTab('stats');
+    setShowSettings(false);
+  }
+
+  function goToQuiz() {
+    setTab('quiz');
+    setShowSettings(false);
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50 font-japanese">
+    <div className="min-h-screen bg-slate-950 font-japanese">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-pink-100 shadow-sm">
+      <header className="sticky top-0 z-10 bg-slate-900/90 backdrop-blur border-b border-slate-800 shadow-sm">
         <div className="max-w-xl mx-auto px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl">🌸</span>
             <div>
-              <h1 className="text-base font-bold text-gray-800 leading-none">JLPT N5</h1>
-              <p className="text-xs text-pink-400 leading-none">Vokabeltrainer</p>
+              <h1 className="text-base font-bold text-slate-100 leading-none">JLPT N5</h1>
+              <p className="text-xs text-indigo-400 leading-none">Vokabeltrainer</p>
             </div>
           </div>
-          <button
-            onClick={() => setShowSettings(s => !s)}
-            className={`p-1.5 rounded-lg text-sm transition-colors ${
-              showSettings ? 'bg-pink-100 text-pink-600' : 'text-gray-500 hover:bg-gray-100'
-            }`}
-            title="Einstellungen"
-          >⚙️</button>
+
+          <div className="flex items-center gap-2">
+            {!isQuiz && (
+              <button
+                onClick={goToQuiz}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-slate-200
+                           bg-slate-800 hover:bg-slate-700 border border-slate-600 transition-colors"
+              >
+                ← Quiz
+              </button>
+            )}
+            {isQuiz && (
+              <button
+                onClick={() => setShowSettings(s => !s)}
+                className={`p-1.5 rounded-lg text-lg transition-colors ${
+                  showSettings
+                    ? 'bg-slate-700 text-white'
+                    : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                }`}
+                title="Einstellungen"
+              >⚙️</button>
+            )}
+          </div>
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-3 space-y-3">
-        {showSettings && (
-          <div className="animate-fade-up">
-            <SettingsPanel settings={settings} onChange={setSettings} />
+      {/* Settings overlay — floats over the quiz card, closes on backdrop click */}
+      {isQuiz && showSettings && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-20 bg-black/40 backdrop-blur-sm"
+            onClick={() => setShowSettings(false)}
+          />
+          {/* Overlay panel — anchored below the header */}
+          <div className="fixed top-[52px] left-1/2 -translate-x-1/2 z-30 w-full max-w-xl px-4">
+            <SettingsPanel
+              settings={settings}
+              onChange={setSettings}
+              categories={categories}
+              onGoToStats={goToStats}
+              onClose={() => setShowSettings(false)}
+            />
           </div>
+        </>
+      )}
+
+      <main className="max-w-xl mx-auto px-4 py-3 space-y-3">
+        {/* Stats view */}
+        {!isQuiz && (
+          <>
+            <CategoryFilter
+              categories={categories}
+              selected={settings.selectedCategory}
+              onChange={cat => setSettings(s => ({ ...s, selectedCategory: cat }))}
+            />
+            <StatsPanel />
+          </>
         )}
 
-        <CategoryFilter
-          categories={categories}
-          selected={settings.selectedCategory}
-          onChange={cat => setSettings(s => ({ ...s, selectedCategory: cat }))}
-        />
-
-        {/* Tab nav */}
-        <div className="flex bg-white rounded-xl p-1 shadow-sm border border-pink-100">
-          {([['quiz', '📝 Quiz'], ['stats', '📊 Statistik']] as [Tab, string][]).map(([t, label]) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`flex-1 py-1.5 rounded-lg text-sm font-medium transition-all
-                ${tab === t ? 'bg-pink-500 text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
-            >{label}</button>
-          ))}
-        </div>
-
-        {tab === 'quiz'  && <QuizPage settings={settings} />}
-        {tab === 'stats' && <StatsPanel />}
+        {/* Quiz */}
+        {isQuiz && <QuizPage settings={settings} />}
       </main>
 
-      <footer className="text-center text-xs text-gray-300 py-4">
+      <footer className="text-center text-xs text-slate-700 py-4">
         🌸 JLPT N5 Vokabeltrainer · がんばって！
       </footer>
     </div>
