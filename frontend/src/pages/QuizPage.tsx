@@ -15,7 +15,8 @@ export default function QuizPage({ settings }: Props) {
     loadNext();
   }, [loadNext]);
 
-  if (state === 'loading') {
+  // Only show spinner on initial load (no card yet) — not between cards
+  if (state === 'loading' && !current) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <div className="text-5xl animate-spin">🌸</div>

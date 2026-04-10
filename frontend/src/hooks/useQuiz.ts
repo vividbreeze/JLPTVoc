@@ -10,8 +10,9 @@ export function useQuiz(settings: Settings) {
   const [streak, setStreak] = useState(0);
   const [sessionCount, setSessionCount] = useState(0);
 
-  const loadNext = useCallback(async () => {
-    setState('loading');
+  // silent=true: keep current card visible while fetching (no flicker between cards)
+  const loadNext = useCallback(async (silent = false) => {
+    if (!silent) setState('loading');
     try {
       const words = await fetchQuizWord(settings.selectedCategory);
       if (!words || words.length === 0) {
@@ -36,7 +37,8 @@ export function useQuiz(settings: Settings) {
     setSessionCount(c => c + 1);
     if (score >= 4) setStreak(s => s + 1);
     else setStreak(0);
-    loadNext();
+    // Fetch next card silently — old card stays on screen until new one is ready
+    loadNext(true);
   }, [current, loadNext]);
 
   return { current, state, streak, sessionCount, loadNext, reveal, rate };
