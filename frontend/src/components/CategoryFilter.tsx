@@ -7,22 +7,22 @@ interface Props {
 }
 
 const CATEGORY_EMOJI: Record<string, string> = {
-  'あいさつ': '👋',
-  '数字':    '🔢',
-  '時間':    '⏰',
-  '食べ物':  '🍱',
-  '飲み物':  '🍵',
-  '家族':    '👨‍👩‍👧',
-  '体':      '🫀',
-  '場所':    '🗺️',
-  '乗り物':  '🚂',
-  '自然':    '🌸',
-  '動物':    '🐾',
-  '形容詞':  '✨',
-  '動詞':    '🏃',
-  '基本語':  '💬',
-  '学校':    '📚',
-  '服':      '👗',
+  'Begrüßung':  '👋',
+  'Zahlen':     '🔢',
+  'Zeit':       '⏰',
+  'Essen':      '🍱',
+  'Getränke':   '🍵',
+  'Familie':    '👨‍👩‍👧',
+  'Körper':     '🫀',
+  'Orte':       '🗺️',
+  'Verkehr':    '🚂',
+  'Natur':      '🌸',
+  'Tiere':      '🐾',
+  'Adjektive':  '✨',
+  'Verben':     '🏃',
+  'Grundwörter':'💬',
+  'Schule':     '📚',
+  'Kleidung':   '👗',
 };
 
 export default function CategoryFilter({ categories, selected, onChange }: Props) {

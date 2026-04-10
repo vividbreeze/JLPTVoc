@@ -79,9 +79,11 @@ export default function QuizCard({ vocab, state, settings, onReveal, onRate }: P
         <div className="absolute top-3 left-4 text-2xl opacity-20 pointer-events-none">🌸</div>
         <div className="absolute top-3 right-4 text-2xl opacity-20 pointer-events-none">🌸</div>
 
-        <div className="mb-2 text-xs text-gray-400 uppercase tracking-widest">
-          {isDE ? 'Wie heißt das auf Japanisch?' : 'Was bedeutet das?'}
-        </div>
+        {isDE && (
+          <div className="mb-2 text-xs text-gray-400 uppercase tracking-widest">
+            Wie heißt das auf Japanisch?
+          </div>
+        )}
 
         {/* Prompt */}
         <div className="min-h-[80px] flex items-center justify-center">
