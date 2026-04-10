@@ -11,7 +11,11 @@ const SCORE_LABELS: Record<number, { label: string; color: string; emoji: string
   5: { label: 'Gemeistert',   color: 'bg-emerald-500',  emoji: '🎯' },
 };
 
-export default function StatsPanel() {
+interface Props {
+  onClose?: () => void;
+}
+
+export default function StatsPanel({ onClose }: Props) {
   const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(() => {
@@ -26,6 +30,17 @@ export default function StatsPanel() {
 
   return (
     <div className="space-y-4">
+      {/* Header with close button */}
+      <div className="flex items-center justify-between">
+        <h3 className="font-semibold text-slate-200 text-sm uppercase tracking-wider">Statistik</h3>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="text-slate-400 hover:text-slate-200 text-xl leading-none transition-colors"
+            title="Schließen"
+          >✕</button>
+        )}
+      </div>
       {/* Overview */}
       <div className="grid grid-cols-3 gap-3">
         {[

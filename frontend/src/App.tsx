@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Settings, Category } from './types';
 import { fetchCategories } from './api/client';
-import CategoryFilter from './components/CategoryFilter';
 import SettingsPanel from './components/SettingsPanel';
 import StatsPanel from './components/StatsPanel';
 import QuizPage from './pages/QuizPage';
@@ -30,13 +29,8 @@ export default function App() {
 
   const isQuiz = tab === 'quiz';
 
-  function goToStats() {
-    setTab('stats');
-    setShowSettings(false);
-  }
-
-  function goToQuiz() {
-    setTab('quiz');
+  function switchTab(t: Tab) {
+    setTab(t);
     setShowSettings(false);
   }
 
@@ -53,27 +47,25 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {!isQuiz && (
-              <button
-                onClick={goToQuiz}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-slate-200
-                           bg-slate-800 hover:bg-slate-700 border border-slate-600 transition-colors"
-              >
-                ← Quiz
-              </button>
-            )}
-            {isQuiz && (
-              <button
-                onClick={() => setShowSettings(s => !s)}
-                className={`p-1.5 rounded-lg text-lg transition-colors ${
-                  showSettings
-                    ? 'bg-slate-700 text-white'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-                }`}
-                title="Einstellungen"
-              >⚙️</button>
-            )}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => switchTab(isQuiz ? 'stats' : 'quiz')}
+              className={`p-1.5 rounded-lg text-lg transition-colors ${
+                !isQuiz
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              }`}
+              title="Statistik"
+            >📊</button>
+            <button
+              onClick={() => { switchTab('quiz'); setShowSettings(s => !s); }}
+              className={`p-1.5 rounded-lg text-lg transition-colors ${
+                showSettings
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+              }`}
+              title="Einstellungen"
+            >⚙️</button>
           </div>
         </div>
       </header>
@@ -92,7 +84,6 @@ export default function App() {
               settings={settings}
               onChange={setSettings}
               categories={categories}
-              onGoToStats={goToStats}
               onClose={() => setShowSettings(false)}
             />
           </div>
@@ -100,19 +91,7 @@ export default function App() {
       )}
 
       <main className="max-w-xl mx-auto px-4 py-3 space-y-3">
-        {/* Stats view */}
-        {!isQuiz && (
-          <>
-            <CategoryFilter
-              categories={categories}
-              selected={settings.selectedCategory}
-              onChange={cat => setSettings(s => ({ ...s, selectedCategory: cat }))}
-            />
-            <StatsPanel />
-          </>
-        )}
-
-        {/* Quiz */}
+        {!isQuiz && <StatsPanel onClose={() => switchTab('quiz')} />}
         {isQuiz && <QuizPage settings={settings} />}
       </main>
 

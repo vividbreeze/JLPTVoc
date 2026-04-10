@@ -1,15 +1,15 @@
 import type { Settings, QuizMode, DisplayMode, Category } from '../types';
+
 import CategoryFilter from './CategoryFilter';
 
 interface Props {
   settings: Settings;
   onChange: (s: Settings) => void;
   categories?: Category[];
-  onGoToStats?: () => void;
   onClose?: () => void;
 }
 
-export default function SettingsPanel({ settings, onChange, categories = [], onGoToStats, onClose }: Props) {
+export default function SettingsPanel({ settings, onChange, categories = [], onClose }: Props) {
   const set = <K extends keyof Settings>(key: K, val: Settings[K]) =>
     onChange({ ...settings, [key]: val });
 
@@ -85,19 +85,6 @@ export default function SettingsPanel({ settings, onChange, categories = [], onG
         </div>
       )}
 
-      {/* Divider + navigation */}
-      {onGoToStats && (
-        <>
-          <div className="border-t border-slate-600" />
-          <button
-            onClick={onGoToStats}
-            className="w-full py-2 rounded-xl text-sm font-medium text-slate-200
-                       bg-slate-700 hover:bg-slate-600 transition-colors"
-          >
-            📊 Statistik ansehen
-          </button>
-        </>
-      )}
     </div>
   );
 }

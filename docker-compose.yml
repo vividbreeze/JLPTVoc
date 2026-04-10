@@ -1,11 +1,8 @@
-version: '3.9'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jlptvoc:latest
     container_name: jlptvoc
     restart: unless-stopped
     ports:

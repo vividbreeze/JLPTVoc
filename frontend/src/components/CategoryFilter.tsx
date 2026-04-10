@@ -26,6 +26,9 @@ const CATEGORY_EMOJI: Record<string, string> = {
   'Familie':         '👨‍👩‍👧',
   'Gefühle':         '😊',
   'Wetter':          '🌤️',
+  'Schule':          '🏫',
+  'Zuhause':         '🏠',
+  'Natur':           '🌿',
   'Sonstiges':       '📦',
 };
 
