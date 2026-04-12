@@ -34,6 +34,17 @@ export async function seed(): Promise<void> {
     console.log('🌸 V7: Neue Vokabelliste (CSV V4) wird geladen...');
   }
 
+  // V8 migration: add multi-category support (category field now comma-separated)
+  // Triggered when 会社 still has only single category 'Alltag' instead of 'Alltag, Beruf'
+  const hasSingleCat = await db.execute(
+    "SELECT COUNT(*) as c FROM vocabulary WHERE japanese = '会社' AND category = 'Alltag'"
+  );
+  if (Number(hasSingleCat.rows[0]?.c ?? 0) > 0) {
+    await db.execute('DELETE FROM progress');
+    await db.execute('DELETE FROM vocabulary');
+    console.log('🌸 V8: Multi-Kategorie-Unterstützung — lade Vokabelliste neu...');
+  }
+
   // Incremental insert — skip if (japanese, hiragana, german) already exists
   let added = 0;
   for (const entry of vocabulary) {

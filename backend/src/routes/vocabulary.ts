@@ -6,14 +6,22 @@ import { toRomaji } from '../services/romajiConverter';
 const router = Router();
 
 // GET /api/vocabulary/categories
+// category field may be comma-separated ("Alltag, Beruf") — split and aggregate in app
 router.get('/categories', async (_req: Request, res: Response) => {
-  const result = await db.execute(
-    'SELECT DISTINCT category, COUNT(*) as count FROM vocabulary GROUP BY category ORDER BY category'
-  );
-  res.json(result.rows);
+  const result = await db.execute('SELECT category FROM vocabulary');
+  const counts = new Map<string, number>();
+  for (const row of result.rows) {
+    const cats = (row.category as string).split(',').map(c => c.trim()).filter(Boolean);
+    for (const cat of cats) counts.set(cat, (counts.get(cat) ?? 0) + 1);
+  }
+  const categories = Array.from(counts.entries())
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => a.category.localeCompare(b.category));
+  res.json(categories);
 });
 
 // GET /api/vocabulary/quiz
+// category filter uses LIKE to support comma-separated multi-category values
 router.get('/quiz', async (req: Request, res: Response) => {
   const { category } = req.query;
 
@@ -22,7 +30,7 @@ router.get('/quiz', async (req: Request, res: Response) => {
        FROM vocabulary v
        LEFT JOIN progress p ON v.id = p.vocabulary_id
        WHERE (p.next_review IS NULL OR p.next_review <= datetime('now'))
-         AND v.category = ?
+         AND (',' || REPLACE(v.category, ' ', '') || ',') LIKE ('%,' || ? || ',%')
        ORDER BY CASE WHEN p.score IS NULL THEN 0 ELSE p.score END ASC, RANDOM()
        LIMIT 1`
     : `SELECT v.*, p.score, p.review_count, p.next_review, p.last_reviewed
@@ -43,7 +51,7 @@ router.get('/', async (req: Request, res: Response) => {
   const sql = category
     ? `SELECT v.*, p.score, p.review_count, p.next_review, p.last_reviewed
        FROM vocabulary v LEFT JOIN progress p ON v.id = p.vocabulary_id
-       WHERE v.category = ?`
+       WHERE (',' || REPLACE(v.category, ' ', '') || ',') LIKE ('%,' || ? || ',%')`
     : `SELECT v.*, p.score, p.review_count, p.next_review, p.last_reviewed
        FROM vocabulary v LEFT JOIN progress p ON v.id = p.vocabulary_id
        ORDER BY v.category`;
