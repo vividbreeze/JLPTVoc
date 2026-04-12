@@ -34,12 +34,12 @@ export async function seed(): Promise<void> {
     console.log('🌸 V7: Neue Vokabelliste (CSV V4) wird geladen...');
   }
 
-  // Incremental insert — skip if (japanese, category) already exists
+  // Incremental insert — skip if (japanese, hiragana, german) already exists
   let added = 0;
   for (const entry of vocabulary) {
     const exists = await db.execute({
-      sql: 'SELECT id FROM vocabulary WHERE japanese = ? AND category = ?',
-      args: [entry.japanese, entry.category],
+      sql: 'SELECT id FROM vocabulary WHERE japanese = ? AND hiragana = ? AND german = ?',
+      args: [entry.japanese, entry.hiragana, entry.german],
     });
     if (exists.rows.length === 0) {
       const result = await db.execute({
